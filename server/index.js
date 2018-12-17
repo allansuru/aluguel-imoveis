@@ -5,6 +5,12 @@ const config = require('./config');
 const FakeDb = require('./fake-db');
 const Rental = require('./models/rental');
 const path = require('path');
+const cors = require('cors')
+
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200
+}
 
 const rentalRoutes = require('./routes/rentals'),
       userRoutes = require('./routes/users'),
@@ -13,6 +19,7 @@ const rentalRoutes = require('./routes/rentals'),
       imageUploadRoutes = require('./routes/image-upload');
 
 mongoose.connect(config.DB_URI).then(() => {
+  console.log('CONN: ', config.DB_URI);
   if (process.env.NODE_ENV !== 'production') {
     const fakeDb = new FakeDb();
     fakeDb.seedDb();
@@ -23,6 +30,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use(cors(corsOptions));
 app.use('/api/v1/rentals', rentalRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
@@ -39,8 +47,8 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT , function() {
-  console.log('App is running!');
+  console.log('App is running on port: ', PORT);
 });
