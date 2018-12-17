@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
-import { LOCALHOST_URL } from '../../../shared/consts';
+import { LOCALHOST_URL } from '../../../shared/consts/consts';
 
 @Injectable()
 export class ImageUploadService {

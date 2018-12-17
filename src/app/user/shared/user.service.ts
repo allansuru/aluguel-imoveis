@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { LOCALHOST_URL } from '../../shared/consts';
+import { LOCALHOST_URL } from '../../shared/consts/consts';
 
 @Injectable()
 export class UserService {
