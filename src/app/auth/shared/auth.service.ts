@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as moment from 'moment';
 import 'rxjs/Rx';
+import { LOCALHOST_URL } from '../../shared/consts';
 
 const jwt = new JwtHelperService();
 
@@ -36,11 +37,11 @@ export class AuthService {
   }
 
   public register(userData: any): Observable<any> {
-    return this.http.post('api/v1/users/register', userData);
+    return this.http.post(`${LOCALHOST_URL}/users/register`, userData);
   }
 
   public login(userData: any): Observable<any> {
-    return this.http.post('api/v1/users/auth', userData).pipe(map(
+    return this.http.post(`${LOCALHOST_URL}/users/auth`, userData).pipe(map(
       (token: string) => this.saveToken(token)));
   }
 

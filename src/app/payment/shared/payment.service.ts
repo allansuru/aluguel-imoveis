@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { LOCALHOST_URL } from '../../shared/consts';
 
 @Injectable()
 export class PaymentService {
@@ -8,15 +9,15 @@ export class PaymentService {
   constructor(private http: HttpClient) {}
 
   public getPendingPayments(): Observable<any> {
-    return this.http.get('/api/v1/payments');
+    return this.http.get(`${LOCALHOST_URL}/payments`);
   }
 
   public acceptPayment(payment): Observable<any> {
-    return this.http.post('/api/v1/payments/accept', payment);
+    return this.http.post(`${LOCALHOST_URL}/payments/accept`, payment);
   }
 
 
   public declinePayment(payment): Observable<any> {
-    return this.http.post('/api/v1/payments/decline', payment);
+    return this.http.post(`${LOCALHOST_URL}/payments/decline`, payment);
   }
 }

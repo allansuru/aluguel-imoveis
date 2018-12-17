@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Rental } from './rental.model';
 import { HttpClient } from '@angular/common/http';
+import { LOCALHOST_URL } from '../../shared/consts';
 
 @Injectable()
 export class RentalService {
@@ -9,34 +10,34 @@ export class RentalService {
   constructor(private http: HttpClient) {}
 
   public getRentalById(rentalId: string): Observable<any> {
-    return this.http.get('/api/v1/rentals/' + rentalId);
+    return this.http.get(`${LOCALHOST_URL}/rentals/` + rentalId);
   }
 
   public getRentals(): Observable<any> {
-    return this.http.get('/api/v1/rentals');
+    return this.http.get(`${LOCALHOST_URL}/rentals`);
   }
 
   public getRentalsByCity(city: string): Observable<any> {
-    return this.http.get(`/api/v1/rentals?city=${city}`);
+    return this.http.get(`${LOCALHOST_URL}/rentals?city=${city}`);
   }
 
   public createRental(rental: Rental): Observable<any> {
-    return this.http.post('/api/v1/rentals', rental);
+    return this.http.post(`${LOCALHOST_URL}/rentals`, rental);
   }
 
   public getUserRentals(): Observable<any> {
-    return this.http.get('/api/v1/rentals/manage');
+    return this.http.get(`${LOCALHOST_URL}/rentals/manage`);
   }
 
   public deleteRental(rentalId: string): Observable<any> {
-    return this.http.delete(`/api/v1/rentals/${rentalId}`);
+    return this.http.delete(`${LOCALHOST_URL}/rentals/${rentalId}`);
   }
 
   public updateDental(rentalId: string, rentalData: any): Observable<any> {
-    return this.http.patch(`/api/v1/rentals/${rentalId}`, rentalData);
+    return this.http.patch(`${LOCALHOST_URL}/rentals/${rentalId}`, rentalData);
   }
 
   public verifyRentalUser(rentalId: string): Observable<any> {
-    return this.http.get(`/api/v1/rentals/${rentalId}/verify-user`);
+    return this.http.get(`${LOCALHOST_URL}/rentals/${rentalId}/verify-user`);
   }
 }
